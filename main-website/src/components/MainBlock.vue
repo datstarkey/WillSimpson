@@ -12,7 +12,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
 import Nav from "./Nav.vue";
 import Title from "./Title.vue";
 import Explore from "./Explore.vue";
@@ -23,19 +22,19 @@ import Slider from "./Slider.vue";
     Nav,
     Title,
     Explore,
-    Slider,
-  },
+    Slider
+  }
 })
 export default class MainBlock extends Vue {}
 </script>
 
 <style>
 .empty-space {
-  height: 200px;
+  height: 100px;
 }
 
 .block {
-  background-image: url("../assets/background.png");
+  background-image: url("../assets/images/background.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 100%;

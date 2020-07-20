@@ -1,7 +1,11 @@
 <template>
-  <div class="explore ">
+  <div class="explore">
     <div class="explore-button animate__animated animate__fadeInUp animate__delay-2s">
-      <img src="../assets/explore-button.svg" class="icon explore-icon" v-on:click="moveToProjects()" />
+      <img
+        src="../assets/explore-button.svg"
+        class="icon explore-icon"
+        v-on:click="moveToProjects()"
+      />
     </div>
 
     <div>
@@ -19,7 +23,7 @@ export default class Explore extends Vue {
     const options: ScrollIntoViewOptions = {
       behavior: "smooth",
       block: "center",
-      inline: "start",
+      inline: "start"
     };
     const element = document.getElementById("slider");
     if (element) {

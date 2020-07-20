@@ -16,8 +16,8 @@ import Footer from "./components/Footer.vue";
   components: {
     MainBlock,
     Contact,
-    Footer,
-  },
+    Footer
+  }
 })
 export default class App extends Vue {}
 </script>
@@ -38,6 +38,19 @@ export default class App extends Vue {}
   overflow-x: hidden;
 }
 
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .animate__animated {
   --animate-duration: 2s;
 }
@@ -47,11 +60,13 @@ export default class App extends Vue {}
 }
 
 .icon {
-  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(215deg) brightness(104%) contrast(101%);
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(215deg)
+    brightness(104%) contrast(101%);
 }
 
 .icon:hover {
-  filter: invert(48%) sepia(18%) saturate(3519%) hue-rotate(345deg) brightness(96%) contrast(84%);
+  filter: invert(48%) sepia(18%) saturate(3519%) hue-rotate(345deg)
+    brightness(96%) contrast(84%);
   cursor: pointer;
 }
 
@@ -67,6 +82,9 @@ span {
 
 button {
   cursor: pointer;
+}
+button:hover {
+  opacity: 0.8;
 }
 
 h1 {

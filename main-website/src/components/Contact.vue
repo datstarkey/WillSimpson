@@ -1,16 +1,12 @@
 <template>
   <div class="contact-space" v-observe-visibility="visibilityChanged">
-    <div class="padd-box" :class="isVisible ? 'animate__animated animate__fadeInUp' : 'display-none'">
-      <h2>
-        Let's work together on your next project.
-      </h2>
-      <p style="margin-top:5rem">
-        Any questions or queries? Want to work together? Don't hesitate to get in touch to see how I can help.
-      </p>
+    <div class="padd-box" :class="isVisible ? 'animate__animated animate__fadeIn' : 'display-none'">
+      <h2>Let's work together on your next project.</h2>
+      <p
+        style="margin-top:5rem"
+      >Any questions or queries? Want to work together? Don't hesitate to get in touch to see how I can help.</p>
 
-      <button class="contact-button">
-        hello[at]wsimpson.co.uk
-      </button>
+      <button class="contact-button">hello[at]wsimpson.co.uk</button>
     </div>
   </div>
 </template>
