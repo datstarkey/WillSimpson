@@ -67,136 +67,185 @@ export default class Slider extends Vue {
     this.isVisible = false;
     this.currentIndex = 0;
     this.selectedProject = projects[0];
-    this.projectPrev = projects[projects.length - 1];
-    this.projectNext = projects[1];
+    this.projectNext = projects[projects.length - 1];
+    this.projectPrev = projects[1];
   }
 
-  moveRight(element: HTMLElement) {
-    element.classList.remove("animate__fadeInLeft", "animate__fadeInRight");
-    element.classList.add("animate__fadeOutRight");
-    setTimeout(() => {
-      element.classList.remove("animate__fadeOutRight");
-      element.classList.add("animate__fadeIn");
-    }, 2000);
+  removeClasses(element: HTMLElement) {
+    element.classList.remove(
+      "animate__fadeInLeft",
+      "animate__fadeInRight",
+      "animate__fadeIn"
+    );
   }
 
-  moveRightInLeft(element: HTMLElement) {
-    element.classList.remove("animate__fadeInLeft", "animate__fadeInRight");
-    element.classList.add("animate__fadeOutRight");
-    setTimeout(() => {
-      element.classList.remove("animate__fadeOutRight");
-      element.classList.add("animate__fadeInLeft");
-    }, 1000);
-  }
-
-  moveLeft(element: HTMLElement) {
-    element.classList.remove("animate__fadeInLeft", "animate__fadeInRight");
-    element.classList.add("animate__fadeOutLeft");
-    setTimeout(() => {
-      element.classList.remove("animate__fadeOutLeft");
-      element.classList.add("animate__fadeIn");
-    }, 2000);
-  }
-
-  moveLeftInRight(element: HTMLElement) {
-    element.classList.remove("animate__fadeInLeft", "animate__fadeInRight");
-    element.classList.add("animate__fadeOutLeft");
-    setTimeout(() => {
-      element.classList.remove("animate__fadeOutLeft");
-      element.classList.add("animate__fadeInRight");
-    }, 1000);
-  }
-
-  changeClasses(
+  changeClass(
     element: HTMLElement,
-    animationIn: string,
-    animationOut: string
+    fadeOut: string,
+    fadeIn: string,
+    setter: () => void,
+    timer: number
   ) {
-    element.classList.remove(animationIn);
-    element.classList.remove(animationOut);
-    element.classList.add(animationOut);
+    this.removeClasses(element);
+    element.classList.add(fadeOut);
     setTimeout(() => {
-      element.classList.remove(animationOut);
-      element.classList.remove(animationIn);
-      element.classList.add(animationIn);
-    }, 2000);
+      setter();
+      element.classList.remove(fadeOut);
+      element.classList.add(fadeIn);
+    }, timer);
   }
 
-  setProjects() {
+  setCurrentProject(): void {
     this.selectedProject = projects[this.currentIndex];
+  }
 
+  setPreviousProject(): void {
     let prevIndex = this.currentIndex - 1;
     if (prevIndex < 0) prevIndex = projects.length - 1;
-    this.projectPrev = projects[prevIndex];
-
-    let nextIndex = this.currentIndex + 1;
-    if (nextIndex >= projects.length) nextIndex = 0;
-    this.projectNext = projects[nextIndex];
+    this.projectNext = projects[prevIndex];
   }
 
-  nextProject() {
-    this.currentIndex++;
-    if (this.currentIndex >= projects.length) this.currentIndex = 0;
+  setNextProject(): void {
+    let nextIndex = this.currentIndex + 1;
+    if (nextIndex >= projects.length) nextIndex = 0;
+    this.projectPrev = projects[nextIndex];
+  }
 
-    this.setProjects();
+  moveLeft(element: HTMLElement, setter: () => void) {
+    this.changeClass(
+      element,
+      "animate__fadeOutLeft",
+      "animate__fadeIn",
+      setter,
+      2000
+    );
+  }
 
-    const nextProjectElement = document.getElementById("next-project");
-    if (nextProjectElement) {
-      this.moveRight(nextProjectElement);
-    }
+  moveInLeft(element: HTMLElement, setter: () => void) {
+    this.removeClasses(element);
+    setter();
+    void element.offsetWidth;
+    element.classList.add("animate__fadeInRight");
+  }
 
+  slideLeft(element: HTMLElement, setProject: () => void, fade: boolean) {
+    this.removeClasses(element);
+    element.classList.add("animate__fadeOutLeft");
     setTimeout(() => {
-      const currentProjectElement = document.getElementById("current-project");
-      if (currentProjectElement) {
-        this.moveRight(currentProjectElement);
+      setProject();
+      let className: string;
+      if (fade) {
+        className = "slide-left-opacity";
+      } else {
+        className = "slide-left";
       }
-      const currentProjectImageElement = document.getElementById(
-        "current-project-image"
-      );
-      if (currentProjectImageElement) {
-        this.moveRight(currentProjectImageElement);
-      }
-    }, 500);
-
-    setTimeout(() => {
-      const prevProjectElement = document.getElementById("previous-project");
-      if (prevProjectElement) {
-        this.moveRightInLeft(prevProjectElement);
-      }
-    }, 1250);
+      element.classList.add(className);
+      element.classList.remove("animate__fadeOutLeft");
+      setTimeout(() => element.classList.remove(className), 2000);
+    }, 1000);
   }
 
   prevProject() {
     this.currentIndex--;
     if (this.currentIndex < 0) this.currentIndex = projects.length - 1;
 
-    this.setProjects();
-
     const prevProjectElement = document.getElementById("previous-project");
     if (prevProjectElement) {
-      this.moveLeft(prevProjectElement);
+      this.moveLeft(prevProjectElement, this.setPreviousProject);
     }
 
     setTimeout(() => {
+      const currentProjectElement = document.getElementById("current-project");
+      if (currentProjectElement) {
+        this.slideLeft(currentProjectElement, this.setCurrentProject, true);
+      }
       const currentProjectImageElement = document.getElementById(
         "current-project-image"
       );
       if (currentProjectImageElement) {
-        this.moveLeft(currentProjectImageElement);
-      }
-
-      const currentProjectElement = document.getElementById("current-project");
-      if (currentProjectElement) {
-        this.moveLeft(currentProjectElement);
+        this.slideLeft(
+          currentProjectImageElement,
+          this.setCurrentProject,
+          false
+        );
       }
     }, 500);
 
     setTimeout(() => {
       const nextProjectElement = document.getElementById("next-project");
       if (nextProjectElement) {
-        this.moveLeftInRight(nextProjectElement);
+        this.moveInLeft(nextProjectElement, this.setNextProject);
       }
-    }, 1250);
+    }, 1500);
+  }
+
+  nextProject() {
+    this.currentIndex++;
+    if (this.currentIndex >= projects.length) this.currentIndex = 0;
+
+    const nextProjectElement = document.getElementById("next-project");
+    if (nextProjectElement) {
+      this.moveRight(nextProjectElement, this.setNextProject);
+    }
+
+    setTimeout(() => {
+      const currentProjectElement = document.getElementById("current-project");
+      if (currentProjectElement) {
+        this.slideRight(currentProjectElement, this.setCurrentProject, true);
+      }
+      const currentProjectImageElement = document.getElementById(
+        "current-project-image"
+      );
+      if (currentProjectImageElement) {
+        this.slideRight(
+          currentProjectImageElement,
+          this.setCurrentProject,
+          false
+        );
+      }
+    }, 500);
+
+    setTimeout(() => {
+      const prevProjectElement = document.getElementById("previous-project");
+      if (prevProjectElement) {
+        this.moveInRight(prevProjectElement, this.setPreviousProject);
+      }
+    }, 2000);
+  }
+
+  moveRight(element: HTMLElement, setter: () => void) {
+    this.changeClass(
+      element,
+      "animate__fadeOutRight",
+      "animate__fadeIn",
+      setter,
+      2000
+    );
+  }
+
+  moveInRight(element: HTMLElement, setter: () => void) {
+    this.removeClasses(element);
+
+    setter();
+    void element.offsetWidth;
+    element.classList.add("animate__fadeInLeft");
+  }
+
+  slideRight(element: HTMLElement, setProject: () => void, fade: boolean) {
+    this.removeClasses(element);
+    element.classList.add("animate__fadeOutRight");
+    setTimeout(() => {
+      setProject();
+      let className: string;
+      if (fade) {
+        className = "slide-right-opacity";
+      } else {
+        className = "slide-right";
+      }
+      element.classList.add(className);
+      element.classList.remove("animate__fadeOutRight");
+      setTimeout(() => element.classList.remove(className), 2000);
+    }, 1000);
   }
 
   visibilityChanged(isVisible: boolean) {
@@ -206,6 +255,66 @@ export default class Slider extends Vue {
 </script>
 
 <style>
+@keyframes slide__right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide__right__opacity {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0%);
+  }
+}
+
+.slide-right {
+  animation-name: slide__right;
+  animation-duration: 1s;
+}
+
+.slide-right-opacity {
+  animation-name: slide__right__opacity;
+  animation-duration: 1s;
+}
+
+@keyframes slide__left {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide__left__opacity {
+  0% {
+    transform: translateX(200%);
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0%);
+  }
+}
+
+.slide-left {
+  animation-name: slide__left;
+  animation-duration: 1s;
+}
+
+.slide-left-opacity {
+  animation-name: slide__left__opacity;
+  animation-duration: 1s;
+}
+
 .current-project {
   height: 90%;
   padding: 2rem 4rem 0;
@@ -272,6 +381,6 @@ export default class Slider extends Vue {
 .project-image {
   padding: 10px;
   width: 25%;
-  height: auto;
+  height: 600px;
 }
 </style>
