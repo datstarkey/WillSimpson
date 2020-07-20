@@ -6,11 +6,10 @@ import VueObserveVisibility from "vue-observe-visibility";
 import Hotjar from "vue-hotjar";
 
 //checks if we're in production
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV === "production" || false;
 
 Vue.use(Hotjar, {
   id: "1908646",
-  snippetVersion: 6,
   isProduction: isProduction,
 });
 
