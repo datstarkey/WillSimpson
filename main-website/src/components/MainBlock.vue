@@ -34,7 +34,6 @@ import { Component, Vue } from "vue-property-decorator";
 import Nav from "./Nav.vue";
 import Title from "./Title.vue";
 import Explore from "./Explore.vue";
-import Slider from "./Slider.vue";
 import Carousel from "./Carousel.vue";
 import { projects } from "../assets/Projects";
 import { IProject } from "../interfaces/IProject";
@@ -44,8 +43,7 @@ import { IProject } from "../interfaces/IProject";
     Nav,
     Title,
     Explore,
-    Carousel,
-    Slider
+    Carousel
   }
 })
 export default class MainBlock extends Vue {
