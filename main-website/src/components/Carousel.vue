@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="flex center mt">
+    <div class="flex center carousel-actions-box">
       <button class="left-arrow-button slider-action-button" v-on:click="moveLeft()">
         <img src="../assets/icons/arrow.svg" class="arrow-icon rotate-arrow" />
       </button>
@@ -259,7 +259,7 @@ export default class Carousel extends Vue {
 .carousel-image {
   width: 100%;
   height: 100%;
-  border: white;
+  border: transparent;
   border-width: 3px;
   border-style: solid;
 }
@@ -285,5 +285,50 @@ export default class Carousel extends Vue {
   flex-direction: column;
   justify-content: space-between;
   padding: 5vw 0;
+}
+.arrow-button {
+  background-color: var(--alt-color);
+  border: none;
+  opacity: 1;
+  width: 50px;
+}
+
+.left-arrow-button {
+  background-color: black;
+  border: none;
+  opacity: 1;
+  width: 50px;
+}
+
+.case-study-button {
+  background-color: var(--alt-color);
+  color: white;
+  border: none;
+  width: 200px;
+  height: 50px;
+}
+
+.case-study-button:hover {
+  opacity: 0.9;
+}
+
+.rotate-arrow {
+  transform: rotate(180deg);
+}
+
+.button-group {
+  display: flex;
+}
+
+.slider-action-button {
+  margin: 0px;
+  height: 60px;
+  width: 60px;
+}
+
+.carousel-actions-box {
+  z-index: 1;
+  margin-top: -3vw;
+  margin-left: -1.5vw;
 }
 </style>
