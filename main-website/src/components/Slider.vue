@@ -69,6 +69,8 @@ export default class Slider extends Vue {
     this.selectedProject = projects[0];
     this.projectNext = projects[projects.length - 1];
     this.projectPrev = projects[1];
+    this.nextProject();
+    this.prevProject();
   }
 
   removeClasses(element: HTMLElement) {

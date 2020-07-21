@@ -13,16 +13,18 @@
         <img class="carousel-image" :src="currentProject.imageLocation" />
       </div>
 
-      <div class="section-container">
-        <div id="carousel-content" class="animate__animated animate__fadeIn">
+      <div class="text-container">
+        <div class="carousel-text">
           <h3>RECENT WORK</h3>
-          <h1 class="response-size">{{ currentProject.title }}</h1>
-          <p class="response-size-paragraph">{{ currentProject.description }}</p>
-          <div class="button-group">
-            <button class="case-study-button mt">CASE STUDY</button>
-            <button class="arrow-button mt">
-              <img src="../assets/icons/arrow.svg" class="arrow-icon" />
-            </button>
+          <div id="carousel-content" class="flex-column space-between mt animate__animated">
+            <h1 class="response-size">{{ currentProject.title }}</h1>
+            <p class="response-size-paragraph">{{ currentProject.description }}</p>
+            <div class="button-group">
+              <button class="case-study-button mt">CASE STUDY</button>
+              <button class="arrow-button mt">
+                <img src="../assets/icons/arrow.svg" class="arrow-icon" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -61,6 +63,8 @@ export default class Carousel extends Vue {
   rightProject: IProject;
   farRight: IProject;
   moving: boolean;
+  queueLeft = false;
+  queueRight = false;
 
   constructor() {
     super();
@@ -125,15 +129,27 @@ export default class Carousel extends Vue {
     setTimeout(() => {
       element.classList.remove(cssClass);
       func();
-    }, 1000);
+    }, 950);
   };
 
   setMovingFalse(): void {
     this.moving = false;
+
+    if (this.queueRight == true) {
+      this.queueRight = false;
+      this.moveRight();
+    }
+
+    if (this.queueLeft == true) {
+      this.queueLeft = false;
+      this.moveLeft();
+    }
   }
 
   moveRight(): void {
-    if (!this.moving) {
+    if (this.moving) {
+      this.queueRight = true;
+    } else {
       this.moving = true;
       this.index--;
       if (this.index < 0) this.index = this.projects.length - 1;
@@ -160,16 +176,20 @@ export default class Carousel extends Vue {
 
       const fakeLeft = document.getElementById("left-hidden-image");
       if (fakeLeft) {
-        setTimeout(() => {
-          this.moveElement(fakeLeft, "right-little", this.setFarLeft);
-        }, 200);
+        this.moveElement(fakeLeft, "right-little", this.setFarLeft);
       }
-      this.setMovingFalse();
+
+      this.setFarRight();
+      setTimeout(() => {
+        this.setMovingFalse();
+      }, 1200);
     }
   }
 
   moveLeft(): void {
-    if (!this.moving) {
+    if (this.moving) {
+      this.queueLeft = true;
+    } else {
       this.moving = true;
       this.index++;
       if (this.index >= this.projects.length) this.index = 0;
@@ -198,7 +218,10 @@ export default class Carousel extends Vue {
         this.moveElement(farRight, "left-little", this.setFarRight);
       }
 
-      this.setMovingFalse();
+      this.setFarLeft();
+      setTimeout(() => {
+        this.setMovingFalse();
+      }, 1200);
     }
   }
 }
@@ -206,6 +229,11 @@ export default class Carousel extends Vue {
 
 <style>
 @import url("./Carousel.css");
+
+#carousel-content {
+  --animate-duration: 0.5s;
+  --animate-delay: 0s;
+}
 
 .response-size {
   font-size: 2vw;
@@ -222,35 +250,40 @@ export default class Carousel extends Vue {
   flex: 0 0 0;
 }
 
-.carousel-image {
-  width: 100%;
-  height: 100%;
-}
-
 .image-container {
   width: 50vw;
   height: 30vw;
+  padding: 1vw;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
   border: white;
   border-width: 3px;
   border-style: solid;
 }
-.image-container:hover {
+
+.carousel-image:hover {
   border: var(--alt-color);
   border-width: 3px;
   border-style: solid;
   cursor: pointer;
 }
 
-.section-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 50vw;
+.text-container {
   height: 30vw;
+  padding: 1vw;
+  width: 50vw;
   background: var(--background-color-2);
   border: var(--background-color-2);
-  border-width: 20px;
-  border-style: solid;
   z-index: 1;
+}
+
+.carousel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5vw 0;
 }
 </style>

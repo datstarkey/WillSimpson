@@ -54,6 +54,11 @@ export default class App extends Vue {}
   flex-direction: column;
 }
 
+.space-between {
+  justify-content: space-between;
+  height: 100%;
+}
+
 .mt {
   margin-top: 50px;
 }
