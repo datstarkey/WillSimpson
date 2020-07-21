@@ -1,6 +1,10 @@
 <template>
   <div class="flex-column mt">
     <div class="carousel-container">
+      <div id="left-hidden-image" class="image-container">
+        <img class="carousel-image" :src="farLeft.imageLocation" />
+      </div>
+
       <div id="left-image" class="image-container">
         <img class="carousel-image" :src="leftProject.imageLocation" v-on:click="moveRight()" />
       </div>
@@ -26,6 +30,10 @@
       <div id="right-image" class="image-container">
         <img class="carousel-image" :src="rightProject.imageLocation" v-on:click="moveLeft()" />
       </div>
+
+      <div id="right-hidden-image" class="image-container">
+        <img class="carousel-image" :src="farRight.imageLocation" />
+      </div>
     </div>
 
     <div class="flex center mt">
@@ -49,7 +57,9 @@ export default class Carousel extends Vue {
   index: number;
   currentProject: IProject;
   leftProject: IProject;
+  farLeft: IProject;
   rightProject: IProject;
+  farRight: IProject;
   moving: boolean;
 
   constructor() {
@@ -58,7 +68,9 @@ export default class Carousel extends Vue {
     this.index = 0;
     this.currentProject = this.projects[0];
     this.rightProject = this.projects[1];
+    this.farRight = this.projects[2];
     this.leftProject = this.projects[this.projects.length - 1];
+    this.farLeft = this.projects[this.projects.length - 2];
   }
 
   setCurrent(): void {
@@ -71,10 +83,27 @@ export default class Carousel extends Vue {
     this.rightProject = this.projects[index];
   }
 
+  setFarRight(): void {
+    let index = this.index + 1;
+    if (index >= this.projects.length) index = 0;
+    index++;
+    if (index >= this.projects.length) index = 0;
+    this.farRight = this.projects[index];
+  }
+
   setLeft(): void {
     let index = this.index - 1;
     if (index < 0) index = this.projects.length - 1;
     this.leftProject = this.projects[index];
+  }
+
+  setFarLeft(): void {
+    let index = this.index - 1;
+    if (index < 0) index = this.projects.length - 1;
+    index--;
+    if (index < 0) index = this.projects.length - 1;
+
+    this.farLeft = this.projects[index];
   }
 
   fadeInOut(element: HTMLElement) {
@@ -127,10 +156,15 @@ export default class Carousel extends Vue {
       const leftImage = document.getElementById("left-image");
       if (leftImage) {
         this.moveElement(leftImage, "right-little", this.setLeft);
-        setTimeout(() => {
-          this.moveElement(leftImage, "offscreen-left", this.setMovingFalse);
-        }, 1000);
       }
+
+      const fakeLeft = document.getElementById("left-hidden-image");
+      if (fakeLeft) {
+        setTimeout(() => {
+          this.moveElement(fakeLeft, "right-little", this.setFarLeft);
+        }, 200);
+      }
+      this.setMovingFalse();
     }
   }
 
@@ -157,10 +191,14 @@ export default class Carousel extends Vue {
       const rightImage = document.getElementById("right-image");
       if (rightImage) {
         this.moveElement(rightImage, "left-far", this.setRight);
-        setTimeout(() => {
-          this.moveElement(rightImage, "offscreen-right", this.setMovingFalse);
-        }, 1000);
       }
+
+      const farRight = document.getElementById("right-hidden-image");
+      if (farRight) {
+        this.moveElement(farRight, "left-little", this.setFarRight);
+      }
+
+      this.setMovingFalse();
     }
   }
 }
@@ -179,7 +217,7 @@ export default class Carousel extends Vue {
 
 .carousel-container {
   width: 100%;
-  height: 15vw;
+  height: 30vw;
   display: flex;
   flex: 0 0 0;
 }
@@ -190,8 +228,8 @@ export default class Carousel extends Vue {
 }
 
 .image-container {
-  width: 15vw;
-  height: 15vw;
+  width: 50vw;
+  height: 30vw;
   border: white;
   border-width: 3px;
   border-style: solid;
@@ -207,8 +245,8 @@ export default class Carousel extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 60%;
-  height: 15vw;
+  width: 50vw;
+  height: 30vw;
   background: var(--background-color-2);
   border: var(--background-color-2);
   border-width: 20px;

@@ -22,7 +22,9 @@
         <Explore />
       </div>
     </div>
-    <Carousel :projects="projects" />
+    <div class="carousel-box">
+      <Carousel :projects="projects" />
+    </div>
     <div class="empty-space" id="end-of-slider" />
   </div>
 </template>
@@ -54,6 +56,11 @@ export default class MainBlock extends Vue {
 <style>
 .empty-space {
   height: 100px;
+}
+
+.carousel-box {
+  width: 200%;
+  margin-left: -50%;
 }
 
 .top {
