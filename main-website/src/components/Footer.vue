@@ -1,15 +1,19 @@
 <template>
-  <div class="footer-content content">
-    <div class="footer-row">
-      <a>hello[at]wsimpson.co.uk</a>
+  <div class="footer-content">
+    <div class="flex center">
+      <div class="content mt">
+        <div class="footer-row">
+          <a>hello[at]wsimpson.co.uk</a>
 
-      <div class="footer-row">
-        <a>Dribble.</a>
-        <a>Instagram.</a>
-        <a>Twitter.</a>
+          <div class="footer-row">
+            <a>Dribble.</a>
+            <a>Instagram.</a>
+            <a>Twitter.</a>
+          </div>
+        </div>
+        <p>© 2020 Will Simpson. All rights reserved</p>
       </div>
     </div>
-    <p>© 2020 Will Simpson. All rights reserved</p>
   </div>
 </template>
 

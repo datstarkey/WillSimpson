@@ -34,8 +34,11 @@ export default class App extends Vue {}
 }
 
 :root {
+  --background-color-1: #131313;
+  --background-color-2: #1b1b1b;
   --alt-color: #e26a2c;
   overflow-x: hidden;
+  background-color: var(--background-color-2);
 }
 
 .flex {
@@ -49,6 +52,10 @@ export default class App extends Vue {}
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.mt {
+  margin-top: 50px;
 }
 
 .animate__animated {

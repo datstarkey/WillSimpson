@@ -1,0 +1,80 @@
+@keyframes right__little {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.right-little {
+  animation-name: right__little;
+  animation-duration: 1s;
+}
+
+@keyframes right__far {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(500%);
+  }
+}
+.right-far {
+  animation-name: right__far;
+  animation-duration: 1s;
+}
+
+@keyframes offscreen__left {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.offscreen-left {
+  animation-name: offscreen__left;
+  animation-duration: 1s;
+}
+
+@keyframes left__little {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.left-little {
+  animation-name: left__little;
+  animation-duration: 1s;
+}
+
+@keyframes left__far {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-500%);
+  }
+}
+
+.left-far {
+  animation-name: left__far;
+  animation-duration: 1s;
+}
+
+@keyframes offscreen__right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.offscreen-right {
+  animation-name: offscreen__right;
+  animation-duration: 1s;
+}

@@ -210,7 +210,7 @@ export default class Slider extends Vue {
       if (prevProjectElement) {
         this.moveInRight(prevProjectElement, this.setPreviousProject);
       }
-    }, 2000);
+    }, 1500);
   }
 
   moveRight(element: HTMLElement, setter: () => void) {
@@ -267,10 +267,10 @@ export default class Slider extends Vue {
 @keyframes slide__right__opacity {
   0% {
     transform: translateX(-100%);
-    opacity: 0%;
+    opacity: 0;
   }
   100% {
-    opacity: 100%;
+    opacity: 1;
     transform: translateX(0%);
   }
 }
@@ -297,10 +297,10 @@ export default class Slider extends Vue {
 @keyframes slide__left__opacity {
   0% {
     transform: translateX(200%);
-    opacity: 0%;
+    opacity: 0;
   }
   100% {
-    opacity: 100%;
+    opacity: 1;
     transform: translateX(0%);
   }
 }
@@ -379,8 +379,8 @@ export default class Slider extends Vue {
 }
 
 .project-image {
-  padding: 10px;
+  padding: 1%;
   width: 25%;
-  height: 600px;
+  height: 60vh;
 }
 </style>

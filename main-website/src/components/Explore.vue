@@ -22,10 +22,10 @@ export default class Explore extends Vue {
   moveToProjects() {
     const options: ScrollIntoViewOptions = {
       behavior: "smooth",
-      block: "center",
-      inline: "start"
+      block: "end",
+      inline: "end"
     };
-    const element = document.getElementById("slider");
+    const element = document.getElementById("end-of-slider");
     if (element) {
       element.scrollIntoView(options);
     }
