@@ -6,7 +6,7 @@
       </div>
 
       <div id="left-image" class="image-container">
-        <img class="carousel-image" :src="leftProject.imageLocation" v-on:click="moveRight()" />
+        <img class="carousel-image" :src="leftProject.imageLocation" />
       </div>
 
       <div id="middle-image" class="image-container">
@@ -15,22 +15,24 @@
 
       <div class="text-container">
         <div class="carousel-text">
-          <h3>RECENT WORK</h3>
-          <div id="carousel-content" class="flex-column space-between mt animate__animated">
-            <h1 class="response-size">{{ currentProject.title }}</h1>
-            <p class="response-size-paragraph">{{ currentProject.description }}</p>
-            <div class="button-group">
-              <button class="case-study-button mt">CASE STUDY</button>
-              <button class="arrow-button mt">
-                <img src="../assets/icons/arrow.svg" class="arrow-icon" />
-              </button>
+          <div>
+            <h3>RECENT WORK</h3>
+            <div id="carousel-content" class="flex-column space-between mt animate__animated">
+              <h1 class="response-size">{{ currentProject.title }}</h1>
+              <p class="response-size-paragraph">{{ currentProject.description }}</p>
+              <div class="button-group">
+                <button class="case-study-button mt">CASE STUDY</button>
+                <button class="arrow-button mt">
+                  <img src="../assets/icons/arrow.svg" class="arrow-icon" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div id="right-image" class="image-container">
-        <img class="carousel-image" :src="rightProject.imageLocation" v-on:click="moveLeft()" />
+        <img class="carousel-image" :src="rightProject.imageLocation" />
       </div>
 
       <div id="right-hidden-image" class="image-container">
@@ -235,25 +237,17 @@ export default class Carousel extends Vue {
   --animate-delay: 0s;
 }
 
-.response-size {
-  font-size: 2vw;
-}
-
-.response-size-paragraph {
-  font-size: 1vw;
-}
-
 .carousel-container {
   width: 100%;
-  height: 30vw;
+  height: 35vw;
   display: flex;
   flex: 0 0 0;
 }
 
 .image-container {
   width: 50vw;
-  height: 30vw;
-  padding: 1vw;
+  height: 35vw;
+  padding: 0.4vw;
 }
 
 .carousel-image {
@@ -264,15 +258,8 @@ export default class Carousel extends Vue {
   border-style: solid;
 }
 
-.carousel-image:hover {
-  border: var(--alt-color);
-  border-width: 3px;
-  border-style: solid;
-  cursor: pointer;
-}
-
 .text-container {
-  height: 30vw;
+  height: 35vw;
   padding: 1vw;
   width: 50vw;
   background: var(--background-color-2);
@@ -284,7 +271,7 @@ export default class Carousel extends Vue {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5vw 0;
+  padding: 5vw 5vw;
 }
 .arrow-button {
   background-color: var(--alt-color);
@@ -294,7 +281,7 @@ export default class Carousel extends Vue {
 }
 
 .left-arrow-button {
-  background-color: black;
+  background-color: var(--background-color-1);
   border: none;
   opacity: 1;
   width: 50px;

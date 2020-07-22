@@ -39,6 +39,13 @@ export default class App extends Vue {}
   --alt-color: #e26a2c;
   overflow-x: hidden;
   background-color: var(--background-color-2);
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .flex {
@@ -63,6 +70,14 @@ export default class App extends Vue {}
   margin-top: 50px;
 }
 
+.mb {
+  margin-bottom: 50px;
+}
+
+.full-height {
+  height: 100%;
+}
+
 .animate__animated {
   --animate-duration: 2s;
 }
@@ -71,7 +86,7 @@ export default class App extends Vue {}
   display: none;
 }
 
-.icon {
+.icon-white {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(215deg)
     brightness(104%) contrast(101%);
 }
@@ -99,6 +114,10 @@ button:hover {
   opacity: 0.8;
 }
 
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
 h1 {
   padding: 0;
   margin: 0;
@@ -132,13 +151,6 @@ p {
 }
 
 a {
-  font-family: Cambon;
-  color: #9b9b9b;
-  padding: 0 5%;
-}
-
-a:hover {
-  color: black;
-  cursor: pointer;
+  text-decoration: none;
 }
 </style>

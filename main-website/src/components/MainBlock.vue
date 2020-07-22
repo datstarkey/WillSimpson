@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="top">
+    <div id="top-of-page" class="top">
       <div class="flex center">
         <div class="content mt">
           <Nav class="animate__animated animate__fadeInDown" />
@@ -22,6 +22,7 @@
         <Explore />
       </div>
     </div>
+    <div class="empty-space" />
     <div class="carousel-box">
       <Carousel :projects="projects" />
     </div>
@@ -53,12 +54,12 @@ export default class MainBlock extends Vue {
 
 <style>
 .empty-space {
-  height: 100px;
+  height: 18vh;
 }
 
 .carousel-box {
-  width: 200%;
-  margin-left: -50%;
+  width: 221%;
+  margin-left: -60%;
 }
 
 .top {

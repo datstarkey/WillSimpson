@@ -1,5 +1,6 @@
 <template>
   <div class="nav">
+    <img src="../assets/icons/logo.svg" class="logo-top" />
     <img src="../assets/hamburger.svg" class="hamburger" />
   </div>
 </template>
@@ -16,17 +17,19 @@ export default class Nav extends Vue {}
   filter: invert(48%) sepia(18%) saturate(3519%) hue-rotate(345deg)
     brightness(96%) contrast(84%);
   cursor: pointer;
+  width: 25px;
+  height: auto;
 }
 
-img {
-  width: 21px;
-  height: 14px;
+.logo-top {
+  height: auto;
+  width: 40px;
 }
 
 .nav {
   display: flex;
   font-size: 5rem;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 </style>
