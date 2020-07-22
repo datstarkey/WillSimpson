@@ -17,12 +17,12 @@
       </p>
     </div>
 
-    <div class="icons icon-white animate__animated animate__fadeInRight">
-      <img src="../assets/icons/dribble.svg" class="icon social-icons" />
+    <div class="icons animate__animated animate__fadeInRight">
+      <img src="../assets/icons/dribble.svg" class="icon icon-white social-icons" />
 
-      <img src="../assets/icons/insta.svg" class="icon social-icons" />
+      <img src="../assets/icons/insta.svg" class="icon icon-white social-icons" />
 
-      <img src="../assets/icons/twitter.svg" class="icon social-icons" />
+      <img src="../assets/icons/twitter.svg" class="icon icon-white social-icons" />
     </div>
   </div>
 </template>
@@ -71,6 +71,7 @@ p > span:hover {
   width: 25px;
   height: auto;
 }
+
 .title {
   display: flex;
   margin-top: 200px;

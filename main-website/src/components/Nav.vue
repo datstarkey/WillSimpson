@@ -13,12 +13,15 @@ export default class Nav extends Vue {}
 </script>
 
 <style>
+.hamburder {
+  width: 25px;
+  height: auto;
+}
+
 .hamburger:hover {
   filter: invert(48%) sepia(18%) saturate(3519%) hue-rotate(345deg)
     brightness(96%) contrast(84%);
   cursor: pointer;
-  width: 25px;
-  height: auto;
 }
 
 .logo-top {
