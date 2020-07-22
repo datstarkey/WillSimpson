@@ -18,11 +18,16 @@
     </div>
 
     <div class="icons animate__animated animate__fadeInRight">
-      <img src="../assets/icons/dribble.svg" class="icon icon-white social-icons" />
+      <a href="https://dribbble.com/wsimpsond" target="blank">
+        <img src="../assets/icons/dribble.svg" class="icon icon-white social-icons" />
+      </a>
 
-      <img src="../assets/icons/insta.svg" class="icon icon-white social-icons" />
-
-      <img src="../assets/icons/twitter.svg" class="icon icon-white social-icons" />
+      <a href="https://www.instagram.com/wsimpson_design" target="blank">
+        <img src="../assets/icons/insta.svg" class="icon icon-white social-icons" />
+      </a>
+      <a href="https://twitter.com/wsimpsond" target="blank">
+        <img src="../assets/icons/twitter.svg" class="icon icon-white social-icons" />
+      </a>
     </div>
   </div>
 </template>

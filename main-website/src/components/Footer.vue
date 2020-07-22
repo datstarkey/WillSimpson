@@ -15,9 +15,13 @@
             </div>
 
             <div class="footer-row">
-              <a class="footer-icon">Dribbble.</a>
-              <a class="footer-icon">Instagram.</a>
-              <a class="footer-icon">Twitter.</a>
+              <a class="footer-icon" href="https://dribbble.com/wsimpsond" target="blank">Dribbble.</a>
+              <a
+                class="footer-icon"
+                href="https://www.instagram.com/wsimpson_design"
+                target="blank"
+              >Instagram.</a>
+              <a class="footer-icon" href="https://twitter.com/wsimpsond" target="blank">Twitter.</a>
             </div>
           </div>
           <div class="footer-row mb">
